@@ -57,5 +57,6 @@ if [[ -d "$RACCOON_APP_DIR" ]]; then
     adb_install_apps ./*
 
 else
+    echo "Raccoon doesn't seem to be installed. Are you sure you want to use this tool?"
     error_exit
 fi

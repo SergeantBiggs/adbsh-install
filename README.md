@@ -11,3 +11,4 @@ I tested it on Arch Linux, but it should *theoretically* work on any Linux Distr
 + Standard Linux tools (sed, awk, bash) ([base](https://www.archlinux.org/groups/x86_64/base/) in Arch Linux)
 + adb
 + sudo
++ [Raccoon](https://raccoon.onyxbits.de/)
