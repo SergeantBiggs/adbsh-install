@@ -37,6 +37,7 @@ function check_versions() {
 
 sudo adb kill-server
 sudo adb devices
+sudo adb wait-for-device || error_exit
 
 if [[ ! -d "$TEMP_DIR" ]]; then
     mkdir $TEMP_DIR
