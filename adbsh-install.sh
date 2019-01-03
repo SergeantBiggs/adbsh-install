@@ -12,7 +12,7 @@ function adb_install_apps () {
     ARGUMENTS=( "$@" )
 
     for single_apk in "${ARGUMENTS[@]}"; do
-        sudo adb install -r "$single_apk"
+        sudo adb install -r "$single_apk" > /dev/null && echo "Installed $single_apk"
     done
 }
 
@@ -49,7 +49,7 @@ if [[ -d "$RACCOON_APP_DIR" ]]; then
     for each_directory in *; do
         cd "$each_directory" || error_exit
         read -ra all_apks <<< "$(echo ./*.apk)"
-        cp "${all_apks[-1]}" $TEMP_DIR
+        cp "${all_apks[-1]}" "$TEMP_DIR"
         cd ../ || error_exit
     done
     cd $TEMP_DIR || error_exit
