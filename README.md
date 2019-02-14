@@ -8,7 +8,7 @@ Crucially, it doesn't really check very well if adb is working and has no good s
 I tested it on Arch Linux, but it should *theoretically* work on any Linux Distro
 
 ## Dependencies
-+ Standard Linux tools (sed, awk, bash) ([base](https://www.archlinux.org/groups/x86_64/base/) in Arch Linux)
++ Standard Linux tools (sed, awk, bash,mktemp) ([base](https://www.archlinux.org/groups/x86_64/base/) in Arch Linux)
 + adb
 + sudo
 + [Raccoon](https://raccoon.onyxbits.de/)

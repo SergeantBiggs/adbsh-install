@@ -1,7 +1,8 @@
 #!/bin/bash
 
-TEMP_DIR="/tmp/installerlist/"
+TEMP_DIR="/tmp/installerlist_XXXXXX/"
 RACCOON_APP_DIR="$HOME/.Raccoon/content/apps/"
+# For mktemp:
 
 function error_exit () {
     echo "Error! Exiting!"
@@ -23,6 +24,7 @@ function check_versions() {
         app_name="$(echo "$single_apk" | awk -F '-' '{print $1}' | awk -F '/' '{print $2}')"
         app_version_device=$(sudo adb shell dumpsys package "$app_name" | awk -F ' ' '/versionCode=/ { print $1 }' | grep -Eo '[0-9]+')
         app_version_host="$(echo "$single_apk" | awk -F '-' '{print $2}' | grep -Eo '[0-9]+')"
+
         if [[ "$app_version_host" -le "$app_version_device" ]]; then
             rm "$single_apk"
         fi
@@ -40,7 +42,11 @@ sudo adb devices
 sudo adb wait-for-device || error_exit
 
 if [[ ! -d "$TEMP_DIR" ]]; then
-    mkdir $TEMP_DIR
+    if [[ $(command -v mktemp) ]]; then
+        TEMP_DIR=$(mktemp -d "$TEMP_DIR")
+    else
+        echo "mktemp is not installed!"; error_exit
+    fi
 fi
 
 if [[ -d "$RACCOON_APP_DIR" ]]; then
@@ -52,7 +58,7 @@ if [[ -d "$RACCOON_APP_DIR" ]]; then
         cp "${all_apks[-1]}" "$TEMP_DIR"
         cd ../ || error_exit
     done
-    cd $TEMP_DIR || error_exit
+    cd "$TEMP_DIR" || error_exit
 
     check_versions ./*
     adb_install_apps ./*
