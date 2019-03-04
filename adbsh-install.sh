@@ -1,8 +1,7 @@
 #!/bin/bash
 
-TEMP_DIR="/tmp/installerlist_XXXXXX/"
+TEMP_DIR="/tmp/installerlist_XXXXXX"
 RACCOON_APP_DIR="$HOME/.Raccoon/content/apps/"
-# For mktemp:
 
 function error_exit () {
     echo "Error! Exiting!"
@@ -31,6 +30,7 @@ function check_versions() {
 
     done
 
+    # Check if directory is empty
     if [[ -z $(ls -A "$TEMP_DIR") ]]; then
         echo "Directory empty, nothing to do"
         exit 0
