@@ -31,7 +31,7 @@ function check_versions() {
     done
 
     # Check if directory is empty
-    if [[ -z $(ls -A "$TEMP_DIR") ]]; then
+    if [[ -z $(command ls -A "$TEMP_DIR") ]]; then
         echo "Directory empty, nothing to do"
         exit 0
     fi
